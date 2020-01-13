@@ -56,8 +56,7 @@ class SmsSubscriber extends CommonSubscriber
     {
         if ($this->phoneNumberNormalizer->getPhoneNumberNormalizerSettings()->beforeSmsSend()) {
             $contact = $event->getLead();
-            $this->phoneNumberNormalizer->setContact($contact);
-            $this->phoneNumberNormalizer->normalize();
+            $this->phoneNumberNormalizer->normalize($contact);
         }
     }
 

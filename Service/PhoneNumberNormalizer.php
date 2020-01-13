@@ -72,7 +72,6 @@ class PhoneNumberNormalizer
             if ($contactPhoneNumber != $formattedPhoneNumber) {
                 $this->contact->addUpdatedField($field, $formattedPhoneNumber);
             }
-            die($this->contact->getFieldValue($field));
         }
 
     }
