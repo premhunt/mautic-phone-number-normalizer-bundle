@@ -54,12 +54,12 @@ class LeadSubscriber extends CommonSubscriber
     public function onLeadPreSave(LeadEvent $event)
     {
         $contact = $event->getLead();
+        $phoneContactFields = $this->phoneNumberNormalizer->getPhoneNumberNormalizerSettings()->getPhoneFields();
         if ($this->phoneNumberNormalizer->getPhoneNumberNormalizerSettings()->beforeFieldChange()) {
-            if ($this->hasChangedFieldForNormalize(
-                $contact,
-                $this->phoneNumberNormalizer->getPhoneNumberNormalizerSettings()->getPhoneFields()
-            )) {
+            if ($this->hasChangedFieldForNormalize($contact, $phoneContactFields)) {
                 $this->phoneNumberNormalizer->normalize($contact);
+                echo $contact->getLeadPhoneNumber();
+                die();
             }
         }
     }

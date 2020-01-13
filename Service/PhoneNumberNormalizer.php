@@ -101,16 +101,15 @@ class PhoneNumberNormalizer
     {
         $regionRules = $this->phoneNumberNormalizerSettings->getRegionRules();
         foreach ($regionRules as $regionRule => $region) {
-            $regionRuleExplodes = explode('|', $regionRule);
-            foreach ($regionRuleExplodes as $regionRuleExplode) {
-                if (strpos($contactPhoneNumber, $regionRuleExplode) === 0) {
-                    try {
-                        $phoneNumber = $this->phoneUtil->parse($contactPhoneNumber, $region);
+            $re = '/^'.$regionRule.'/m';
+            preg_match_all($re, $contactPhoneNumber, $matches, PREG_SET_ORDER, 0);
+            if (!empty($matches)) {
+                try {
+                    $phoneNumber = $this->phoneUtil->parse($contactPhoneNumber, $region);
 
-                        return $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::E164);
-                    } catch (NumberParseException $e) {
+                    return $this->phoneUtil->format($phoneNumber, PhoneNumberFormat::E164);
+                } catch (NumberParseException $e) {
 
-                    }
                 }
             }
         }
