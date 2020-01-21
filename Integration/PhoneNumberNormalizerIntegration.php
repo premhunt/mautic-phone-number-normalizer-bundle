@@ -12,6 +12,7 @@ use Mautic\CoreBundle\Form\Type\SortableListType;
 use Mautic\CoreBundle\Form\Type\YesNoButtonGroupType;
 use Mautic\LeadBundle\Form\Type\LeadFieldsType;
 use Mautic\PluginBundle\Integration\AbstractIntegration;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -47,7 +48,6 @@ class PhoneNumberNormalizerIntegration extends AbstractIntegration
     {
         return 'plugins/MauticPhoneNumberNormalizerBundle/Assets/img/icon.png';
     }
-
 
 
     /**
@@ -88,6 +88,9 @@ class PhoneNumberNormalizerIntegration extends AbstractIntegration
                     'option_required'  => false,
                     'key_value_pairs'  => true,
                     'required'         => false,
+                    'attr'             => [
+                        'tooltip' => 'mautic.phonenumbernormalizer.form.start_with.tooltip',
+                    ],
 
                 ]
             );
@@ -99,6 +102,7 @@ class PhoneNumberNormalizerIntegration extends AbstractIntegration
                     'label' => 'mautic.phonenumbernormalizer.form.before_field_change',
                     'data'  => (isset($data['before_field_change'])) ? (bool) $data['before_field_change'] : false,
                     'attr'  => [
+                        'tooltip' => 'mautic.phonenumbernormalizer.form.before_field_change.tooltip',
                     ],
                 ]
             );
@@ -110,6 +114,7 @@ class PhoneNumberNormalizerIntegration extends AbstractIntegration
                     'label' => 'mautic.phonenumbernormalizer.form.before_sms_send',
                     'data'  => (isset($data['before_sms_send'])) ? (bool) $data['before_sms_send'] : false,
                     'attr'  => [
+                        'tooltip' => 'mautic.phonenumbernormalizer.form.before_sms_send.tooltip',
                     ],
                 ]
             );

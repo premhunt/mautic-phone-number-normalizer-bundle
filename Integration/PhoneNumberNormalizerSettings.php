@@ -55,7 +55,7 @@ class PhoneNumberNormalizerSettings
      */
     public function getPhoneFields()
     {
-        return ArrayHelper::getValue('phone_fields', $this->settings, null);
+        return ArrayHelper::getValue('phone_fields', $this->settings, []);
     }
 
     /**

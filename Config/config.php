@@ -45,6 +45,14 @@ return [
                     'mautic.phonenumbernormalizer.integration.settings'
                 ],
             ],
+            'mautic.phonenumbernormalizer.model.contact_phone_number' => [
+                'class'     => \MauticPlugin\MauticPhoneNumberNormalizerBundle\Model\ContactPhoneNumberModel::class,
+                'arguments' => [
+                    'doctrine.orm.entity_manager',
+                    'mautic.lead.repository.lead',
+                    'mautic.phonenumbernormalizer.integration.settings'
+                ],
+            ],
             'mautic.phonenumbernormalizer.integration.settings' => [
                 'class'     => \MauticPlugin\MauticPhoneNumberNormalizerBundle\Integration\PhoneNumberNormalizerSettings::class,
                 'arguments' => [
@@ -55,7 +63,16 @@ return [
         'controllers'  => [
         ],
         'commands'     => [
-
+            'mautic.phonenumbernormalizer.command.normalize' => [
+                'class'     => \MauticPlugin\MauticPhoneNumberNormalizerBundle\Command\NormalizeCommand::class,
+                'arguments' => [
+                    'mautic.phonenumbernormalizer.service.normalizer',
+                    'mautic.phonenumbernormalizer.model.contact_phone_number',
+                    'mautic.lead.model.lead',
+                    'translator'
+                ],
+                'tag'       => 'console.command',
+            ],
         ],
     ],
     'parameters' => [

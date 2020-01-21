@@ -51,6 +51,11 @@ class PhoneNumberNormalizer
         $this->phoneUtil                     = PhoneNumberUtil::getInstance();
     }
 
+    /**
+     * @param $contact
+     *
+     * @return Lead
+     */
     public function normalize($contact)
     {
         $this->contact = $contact;
@@ -73,6 +78,8 @@ class PhoneNumberNormalizer
                 $this->contact->addUpdatedField($field, $formattedPhoneNumber);
             }
         }
+
+        return $this->contact;
 
     }
 
