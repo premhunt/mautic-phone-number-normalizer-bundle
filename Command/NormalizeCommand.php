@@ -28,6 +28,7 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class NormalizeCommand extends ModeratedCommand
@@ -157,16 +158,27 @@ class NormalizeCommand extends ModeratedCommand
 
             if ($dryRun) {
                 $table->render();
+
+                $helper   = $this->getHelperSet()->get('question');
+                $question = new ConfirmationQuestion(
+                    '<info>'.$this->translator->trans('mautic.phonenumbernormalizer.command.continue.next.batch').'</info> ', false
+                );
+
+                if (!$helper->ask($input, $output, $question)) {
+                    break;
+                }
+
             } else {
                 $this->leadModel->saveEntities($contacts);
                 $this->leadModel->getRepository()->clear();
             }
             $start = $start + $batchLimit;
 
-
+        }
+        if (!$dryRun) {
+            $progress->finish();
         }
 
-        $progress->finish();
 
         $output->writeln('');
         $output->writeln($this->translator->trans('mautic.phonenumbernormalizer.modified', ['%count%' => $modified]));
