@@ -11,7 +11,8 @@
 
 namespace MauticPlugin\MauticPhoneNumberNormalizerBundle\EventListener;
 
-use Mautic\CoreBundle\EventListener\CommonSubscriber;
+//use Mautic\CoreBundle\EventListener\CommonSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Mautic\CoreBundle\Model\NotificationModel;
 use Mautic\LeadBundle\Event\LeadEvent;
 use Mautic\LeadBundle\LeadEvents;
@@ -21,7 +22,7 @@ use Mautic\UserBundle\Model\UserModel;
 use MauticPlugin\MauticPhoneNumberNormalizerBundle\Integration\PhoneNumberNormalizerSettings;
 use MauticPlugin\MauticPhoneNumberNormalizerBundle\Service\PhoneNumberNormalizer;
 
-class SmsSubscriber extends CommonSubscriber
+class SmsSubscriber implements EventSubscriberInterface
 {
 
     /**

@@ -69,7 +69,6 @@ class PhoneNumberNormalizerIntegration extends AbstractIntegration
                         'class' => 'form-control',
                     ],
                     'required'    => true,
-                    'empty_value' => '',
                     'multiple'    => true,
                     'constraints' => [
                         new NotBlank(),
